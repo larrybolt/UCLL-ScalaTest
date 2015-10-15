@@ -1,7 +1,8 @@
-language: java
-before_install:
-  - mvn install
+language: scala
+scala:
+  - 2.10.4
 jdk:
   - oraclejdk8
-script:
-  - nvm test
+  - oraclejdk7
+  - openjdk7
+  - openjdk6
