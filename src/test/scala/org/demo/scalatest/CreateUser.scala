@@ -16,7 +16,7 @@ class CreateUser extends FeatureSpec with GivenWhenThen {
 
   feature("Create user"){
     info("As an administrator")
-    info("I want to be able to register users")
+    info("I want to be dfdfable to register users")
     info("So that I can limit access to the application")
     scenario("The personal details of a user can be registered") {
       given("the firstname Bert, lastname Bertels, email bert.bertels@gmail.com and password 1PasswordForBert")
