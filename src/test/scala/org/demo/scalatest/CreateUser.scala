@@ -3,6 +3,17 @@ import org.scalatest._
 import domain._
 
 class CreateUser extends FeatureSpec with GivenWhenThen {
+  var person : Person = _
+  var firstname : String = _
+  var lastname : String = _
+  var email : String = _
+  var password : String = _
+  
+  def createPerson() {
+    person = null
+    person = new Person(email, password, firstname, lastname)
+  }
+
   feature("Create user"){
     info("As an administrator")
     info("I want to be able to register users")
