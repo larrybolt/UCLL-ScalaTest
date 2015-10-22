@@ -1,5 +1,7 @@
 package domain;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -66,9 +68,22 @@ public class Person {
 	}
 	
 	private String hashPassword(String password) {
-		return "0123456789012345678901234567890123456789";
+		return Person.hashString(password);
 	}
 	
+
+	public static String hashString(String input){
+		MessageDigest crypt;
+		try {
+			crypt = MessageDigest.getInstance("SHA-1");
+			crypt.reset();
+			crypt.update(input.getBytes("UTF-8"));
+			byte[] digest = crypt.digest();
+			return new BigInteger(1, digest).toString(16);
+		} catch (Exception e) {
+			throw new RuntimeException("error hashing password\r\n"+e);
+		}
+	}
 
 	public String getFirstName() {
 		return firstName;
