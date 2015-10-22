@@ -1,5 +1,6 @@
 package org.demo.scalatest
 import org.scalatest._
+import org.scalatest.prop.TableDrivenPropertyChecks._
 import domain._
 
 class CreateUser extends FeatureSpec with GivenWhenThen {
@@ -16,17 +17,16 @@ class CreateUser extends FeatureSpec with GivenWhenThen {
 
   feature("Create user"){
     info("As an administrator")
-    info("I want to be dfdfable to register users")
+    info("I want to be able to register users")
     info("So that I can limit access to the application")
     scenario("The personal details of a user can be registered") {
-      given("the firstname Bert, lastname Bertels, email bert.bertels@gmail.com and password 1PasswordForBert")
-      val firstname = "Bert"
-      val lastname = "Bertels"
-      val email = "bert.bertels@gmail.com"
-      val password = "1PasswordForBert"
-      
-      when("I choose to create the perosn with the given data")
-      val person = new Person(email, password, firstname, lastname)
+      firstname = "Bert"
+      lastname = "Bertels"
+      email = "bert.bertels@gmail.com"
+      password = "1PasswordForBert"
+      given(s"the firstname $firstname, lastname $lastname, email $email and password $password")
+      when("I choose to create the person with the given data")
+      createPerson()
       
       then("a person object is created with these data")
       assert(firstname == person.getFirstName)
@@ -35,15 +35,14 @@ class CreateUser extends FeatureSpec with GivenWhenThen {
       assert(person.getPassword != null)
     }
     scenario("Scenario: the firstname of a user is not mandatory") {
-      given("the lastname Bertels, email bert.bertels@gmail.com and password PasswordForBert but no firstname")
-      val firstname = null;
-      val lastname = "Bertels"
-      val email = "bert.bertels@gmail.com"
-      val password = "1PasswordForBert"
-
+      firstname = null;
+      lastname = "Bertels"
+      email = "bert.bertels@gmail.com"
+      password = "1PasswordForBert"
+      given(s"the lastname $lastname, email $email and password $password but no firstname")
       when("I choose to create the person with the given data")
-      val person = new Person(email, password, firstname, lastname)
-      
+      createPerson()
+
       then("Then a person object is created with these data and no firstname")
       assert(firstname == person.getFirstName)
       assert(lastname == person.getLastName)
@@ -65,6 +64,11 @@ class CreateUser extends FeatureSpec with GivenWhenThen {
       assert(lastname == person.getLastName)
       assert(email == person.getUserId)
       assert(person.getPassword != null)
+    }
+    scenario("Scenario: the password cannot be stored as plain text") {
+      given("Given the password PasswordForBert")
+      when("When I choose to create a person with this password")
+      then("Then the password is stored as a digest of 40 characters")
     }
   }
 }
