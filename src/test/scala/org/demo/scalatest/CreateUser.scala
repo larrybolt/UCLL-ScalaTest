@@ -1,6 +1,5 @@
 package org.demo.scalatest
 import org.scalatest._
-import org.scalatest.prop.TableDrivenPropertyChecks._
 import domain._
 import org.scalatest.prop.TableDrivenPropertyChecks._
 
@@ -22,7 +21,7 @@ class CreateUser extends FeatureSpec with GivenWhenThen {
     info("So that I can limit access to the application")
 
     /**
-     * case 1
+     * Specification 1
      */
     scenario("The personal details of a user can be registered") {
       firstname = "Bert"
@@ -43,7 +42,7 @@ class CreateUser extends FeatureSpec with GivenWhenThen {
     }
 
     /**
-     * case 2
+     * Specification 2
      * scenario 1
      */
     scenario("The firstname of a user is not mandatory") {
@@ -65,7 +64,7 @@ class CreateUser extends FeatureSpec with GivenWhenThen {
     }
 
     /**
-     * case 2
+     * Specification 2
      * scenario 2
      */
     scenario("the lastname of a user is not mandatory") {
@@ -87,7 +86,7 @@ class CreateUser extends FeatureSpec with GivenWhenThen {
     }
     
     /**
-     * case 3
+     * Specification 3
      * scenario 1
      */
     scenario("The password cannot be stored as plain text") {
@@ -104,7 +103,7 @@ class CreateUser extends FeatureSpec with GivenWhenThen {
     }
 
     /**
-     * case 3
+     * Specification 3
      * scenario 2
      */
     scenario("different passwords have different hashed values") {
@@ -122,7 +121,7 @@ class CreateUser extends FeatureSpec with GivenWhenThen {
     }
 
     /**
-     * case 3
+     * Specification 3
      * scenario 3
      */
     scenario("identical passwords have different hashed values") {
@@ -138,7 +137,7 @@ class CreateUser extends FeatureSpec with GivenWhenThen {
     }
 
     /**
-     * case 4
+     * Specification 4
      * scenario 1
      */
     scenario("the email of a user is mandatory") {
@@ -158,7 +157,7 @@ class CreateUser extends FeatureSpec with GivenWhenThen {
     }
 
     /**
-     * case 4
+     * Specification 4
      * scenario 2
      */
     scenario("the password of a user is mandatory") {
@@ -178,7 +177,7 @@ class CreateUser extends FeatureSpec with GivenWhenThen {
     }
     
     /**
-     * case 5
+     * Specification 5C
      */
      scenario("the email of a user should be a valid email address"){
        given("an email address")
@@ -210,7 +209,7 @@ class CreateUser extends FeatureSpec with GivenWhenThen {
      }
      
      /**
-      * case 6
+      * Specification 5B
       * scenario 1
       */
      scenario("the local part of an email address can have one part"){
@@ -227,7 +226,7 @@ class CreateUser extends FeatureSpec with GivenWhenThen {
      }
      
      /**
-      * case 6
+      * Specification 5B
       * scenario 2
       */
      scenario("the local and domain part of an email address can have two parts seperated by a dot"){
@@ -241,7 +240,7 @@ class CreateUser extends FeatureSpec with GivenWhenThen {
      }
      
      /**
-      * case 6
+      * Specification 5B
       * scenario 3
       */
      scenario("the domain part of an email address can have three parts separated by a dot") {
@@ -255,10 +254,5 @@ class CreateUser extends FeatureSpec with GivenWhenThen {
        createPerson()
        assert(person.getUserId == email)
      }
-     
-     /**
-      * case 7 
-      * TODO
-      */
   }
 }
