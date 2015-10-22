@@ -34,8 +34,8 @@ class CreateUser extends FeatureSpec with GivenWhenThen {
       assert(email == person.getUserId)
       assert(person.getPassword != null)
     }
-    scenario("Scenario: the firstname of a user is not mandatory") {
-      firstname = null;
+    scenario("The firstname of a user is not mandatory") {
+      firstname = null
       lastname = "Bertels"
       email = "bert.bertels@gmail.com"
       password = "1PasswordForBert"
@@ -49,12 +49,12 @@ class CreateUser extends FeatureSpec with GivenWhenThen {
       assert(email == person.getUserId)
       assert(person.getPassword != null)
     }
-    scenario("Scenario: the lastname of a user is not mandatory") {
+    scenario("the lastname of a user is not mandatory") {
       given("the lastname Bertels, email bert.bertels@gmail.com and password PasswordForBert but no lastname")
-      val firstname = "Bert"
-      val lastname = null
-      val email = "bert.bertels@gmail.com"
-      val password = "1PasswordForBert"
+      firstname = "Bert"
+      lastname = null
+      email = "bert.bertels@gmail.com"
+      password = "1PasswordForBert"
 
       when("I choose to create the person with the given data")
       val person = new Person(email, password, firstname, lastname)
@@ -73,10 +73,10 @@ class CreateUser extends FeatureSpec with GivenWhenThen {
     scenario("The password cannot be stored as plain text") {
       
       given("the password PasswordForBert")
-      val password = "PasswordForBert"
+      password = "PasswordForBert"
       
       when("I choose to create a person with this password")
-      val person = new Person(email, password, firstname, lastname)
+      createPerson()
       
       then("the password is stored as a digest of 40 characters")
       assert(person.getPassword.length() == 40)
@@ -89,11 +89,11 @@ class CreateUser extends FeatureSpec with GivenWhenThen {
      */
     scenario("different passwords have different hashed values"){
       given("the password PasswordForBert and another password OtherPasswordForJan")
-      val password = "PasswordForBert" 
+      password = "PasswordForBert" 
       val another_password = "OtherPasswordForJan"
       
       when("I choose to create a person with the first password and I choose to create a person with the second password")
-      val person = new Person(email, password, firstname, lastname)
+      createPerson()
       val another_person = new Person(email, another_password, firstname, lastname)
       
       then("the stored password of the first person is different from the stored password of the second user")
@@ -148,7 +148,7 @@ class CreateUser extends FeatureSpec with GivenWhenThen {
       val password = null
       
       when("I choose to create the person with the given data")
-      val person = new Person(email, firstname, lastname, password)    
+      createPerson() 
     }
       
 
