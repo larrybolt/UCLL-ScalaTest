@@ -148,8 +148,10 @@ class CreateUser extends FeatureSpec with GivenWhenThen {
       val email = "bert.bertels@gmail.com"
       val password = null
       
-      //TODO 
+      when("I choose to create the person with the given data")
+      val person = new Person(email, firstname, lastname, password)    
     }
+      
 
   }
 }
